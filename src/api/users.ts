@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import crypto from "crypto";
+import crypto, { randomBytes } from "crypto";
 import { v4 as uuidv4 } from "uuid";
 import { respondWithError, respondWithJSON } from "./json.js";
 import { createUser, getUser } from "../db/queries/users.js";
@@ -37,6 +37,6 @@ function generateRandomSHA256Hash(): string {
   // should we be using crypto.randomBytes instead of crypto.pseudoRandomBytes?
   return crypto
     .createHash("sha256")
-    .update(crypto.pseudoRandomBytes(32))
+    .update(randomBytes(32))
     .digest("hex");
 }
